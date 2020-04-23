@@ -2,8 +2,9 @@ const { Engine, Render, Runner, World, Bodies } = Matter;
 
 const width = 600;
 const height = 600;
-const borderSize = 40;
-const cells = 3;
+const borderSize = 2;
+const wallSize = 5;
+const cells = 20;
 
 const unitLength = width / cells;
 
@@ -129,7 +130,7 @@ horizontals.forEach((row, rowIndex) => {
       columnIndex * unitLength + unitLength / 2,
       rowIndex * unitLength + unitLength,
       unitLength,
-      5,
+      wallSize,
       { isStatic: true }
     );
     World.add(world, wall);
@@ -145,10 +146,20 @@ verticals.forEach((row, rowIndex) => {
     const wall = Bodies.rectangle(
       columnIndex * unitLength + unitLength,
       rowIndex * unitLength + unitLength / 2,
-      5,
+      wallSize,
       unitLength,
       { isStatic: true }
     );
     World.add(world, wall);
   });
 });
+
+const goal = Bodies.rectangle(
+  width - unitLength / 2,
+  height - unitLength / 2,
+  unitLength * 0.7,
+  unitLength * 0.7,
+  { isStatic: true }
+);
+
+World.add(world, goal);
