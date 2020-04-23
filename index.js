@@ -9,6 +9,8 @@ const cells = 20;
 const unitLength = width / cells;
 
 const engine = Engine.create();
+engine.world.gravity.y = 0;
+
 const { world } = engine;
 const render = Render.create({
   element: document.body,
