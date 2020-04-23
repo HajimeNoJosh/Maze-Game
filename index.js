@@ -4,8 +4,8 @@ const width = window.innerWidth;
 const height = window.innerHeight;
 const borderSize = 2;
 const wallSize = 5;
-const cellsHorizontal = 14;
-const cellsVertical = 10;
+const cellsHorizontal = 50;
+const cellsVertical = 20;
 
 const unitLengthX = width / cellsHorizontal;
 const unitLengthY = height / cellsVertical;
@@ -135,7 +135,13 @@ horizontals.forEach((row, rowIndex) => {
       rowIndex * unitLengthY + unitLengthY,
       unitLengthX,
       wallSize,
-      { label: "wall", isStatic: true }
+      {
+        label: "wall",
+        isStatic: true,
+        render: {
+          fillStyle: "red",
+        },
+      }
     );
     World.add(world, wall);
   });
@@ -152,7 +158,13 @@ verticals.forEach((row, rowIndex) => {
       rowIndex * unitLengthY + unitLengthY / 2,
       wallSize,
       unitLengthY,
-      { label: "wall", isStatic: true }
+      {
+        label: "wall",
+        isStatic: true,
+        render: {
+          fillStyle: "red",
+        },
+      }
     );
     World.add(world, wall);
   });
@@ -163,7 +175,13 @@ const goal = Bodies.rectangle(
   height - unitLengthY / 2,
   unitLengthX * 0.7,
   unitLengthY * 0.7,
-  { label: "goal", isStatic: true }
+  {
+    label: "goal",
+    isStatic: true,
+    render: {
+      fillStyle: "green",
+    },
+  }
 );
 
 World.add(world, goal);
@@ -171,6 +189,9 @@ World.add(world, goal);
 const ballRadius = Math.min((unitLengthX, unitLengthY) / 4);
 const ball = Bodies.circle(unitLengthX / 2, unitLengthY / 2, ballRadius, {
   label: "ball",
+  render: {
+    fillStyle: "blue",
+  },
 });
 
 World.add(world, ball);
