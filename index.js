@@ -4,7 +4,7 @@ const width = 600;
 const height = 600;
 const borderSize = 2;
 const wallSize = 5;
-const cells = 3;
+const cells = 7;
 
 const unitLength = width / cells;
 
@@ -133,7 +133,7 @@ horizontals.forEach((row, rowIndex) => {
       rowIndex * unitLength + unitLength,
       unitLength,
       wallSize,
-      { isStatic: true }
+      { label: "wall", isStatic: true }
     );
     World.add(world, wall);
   });
@@ -150,7 +150,7 @@ verticals.forEach((row, rowIndex) => {
       rowIndex * unitLength + unitLength / 2,
       wallSize,
       unitLength,
-      { isStatic: true }
+      { label: "wall", isStatic: true }
     );
     World.add(world, wall);
   });
@@ -201,7 +201,12 @@ Events.on(engine, "collisionStart", (event) => {
       labels.includes(collision.bodyA.label) &&
       labels.includes(collision.bodyB.label)
     ) {
-      console.log("User won!");
+      world.gravity.y = 1;
+      world.bodies.forEach((body) => {
+        if (body.label === "wall") {
+          Body.setStatic(body, false);
+        }
+      });
     }
   });
 });
